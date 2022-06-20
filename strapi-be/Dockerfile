@@ -1,10 +1,19 @@
 FROM node:16-alpine
+# Installing libvips-dev for sharp compatability
+# RUN apt-get update && apt-get install libvips-dev
+ENV NODE_ENV=${NODE_ENV}
 
-WORKDIR /usr/src/app
+# WORKDIR /opt/
+# COPY ./package.json ./yarn.lock ./
 
-COPY ./app/package*.json ./
-RUN npm install
-COPY ./app .
+# ENV PATH /opt/node_modules/.bin:$PATH
 
-EXPOSE 3000
-CMD ["npm", "start"]
+WORKDIR /opt/app
+COPY ./ .
+
+RUN yarn install
+RUN yarn build
+
+EXPOSE 1337
+
+CMD ["yarn", "start"]
