@@ -22,7 +22,7 @@ services:
     #   - ./yarn.lock:/opt/yarn.lock # Replace with package-lock.json if using npm
     #   - ./Dockerfile:/opt/Dockerfile
     ports:
-      - ${DC_APP_PORT}:1337
+      - 1337:1337
     # networks:
     #   - strapi_service
 
