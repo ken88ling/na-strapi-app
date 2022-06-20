@@ -52,13 +52,13 @@ jobs:
       - uses: actions/checkout@v2 
       - name: Deploy in EC2
         env:
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY  }}
-            SERVER_HOST : ${{ secrets.SERVER_HOST  }}
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            SERVER_HOST : ${{ secrets.SERVER_HOST }}
             DEPLOY_ENV: staging
             APP_PORT: 1337
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          scp -o StrictHostKeyChecking=no -i private_key .strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
+          scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST
             
 
