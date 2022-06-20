@@ -61,6 +61,7 @@ jobs:
           scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
+              docker pull david8087/coffee-be:latest &&
               export COMPOSE_PROJECT_NAME=$DEPLOY_ENV &&
               export DC_APP_PORT=1337 &
 
