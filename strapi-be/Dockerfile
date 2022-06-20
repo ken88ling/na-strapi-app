@@ -11,9 +11,9 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/app
 COPY ./ .
 
-RUN yarn install
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 EXPOSE 1337
 
-CMD ["yarn", "start"]
+CMD ["npm ","run", "start"]
