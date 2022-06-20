@@ -60,9 +60,9 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
           scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
-              docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN &&
+              docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               export COMPOSE_PROJECT_NAME=$DEPLOY_ENV &&
-              export DC_APP_PORT=$APP_PORT &
+              export DC_APP_PORT=1337 &
 
               docker-compose down &&
               docker-compose up -d"
