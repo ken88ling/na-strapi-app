@@ -6,7 +6,7 @@ ENV NODE_ENV=${NODE_ENV}
 # WORKDIR /opt/
 # COPY ./package.json ./yarn.lock ./
 
-# ENV PATH /opt/node_modules/.bin:$PATH
+ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app
 COPY ./ .
