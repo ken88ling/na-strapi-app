@@ -63,11 +63,12 @@ jobs:
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull david8087/coffee-be:latest &&
               export COMPOSE_PROJECT_NAME=$DEPLOY_ENV &&
-              export DC_APP_PORT=${{ env.APP_PORT }} &
+              export DC_APP_PORT=$APP_PORT &
 
               docker-compose down &&
               docker-compose up -d"
             
+          echo $DC_APP_PORT
 
 
     
