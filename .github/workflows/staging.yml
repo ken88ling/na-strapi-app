@@ -26,9 +26,7 @@ jobs:
       
       - name: test
         run: |
-          cat ./strapi-be/Dockerfile
-          echo "hellow orld
-        
+          cat ./strapi-be/Dockerfile     
         
           
       - name: Login to Docker Hub
