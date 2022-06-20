@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine as build-stage
 # Installing libvips-dev for sharp compatability
 # RUN apt-get update && apt-get install libvips-dev
 ENV NODE_ENV=${NODE_ENV}
