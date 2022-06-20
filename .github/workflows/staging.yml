@@ -1,9 +1,9 @@
-name: staging
+name: main
 on:
   pull_request:
-    branches: [staging]
+    branches: [main]
   push:
-    branches: [staging]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
