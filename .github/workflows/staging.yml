@@ -38,8 +38,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./strapi-be/Dockerfile
+          context: ./strapi-be/
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest
                
