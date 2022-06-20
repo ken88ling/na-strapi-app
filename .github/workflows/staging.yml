@@ -64,6 +64,7 @@ jobs:
               docker-compose up -d"
             
           echo "App Port is:" $DC_APP_PORT
+          echo "saPP IS: $APP_PORT
 
 
     
