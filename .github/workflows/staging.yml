@@ -27,6 +27,7 @@ jobs:
       - name: test
         run: |
           cat ./strapi-be/Dockerfile
+          echo "hellow orld
         
         
           
