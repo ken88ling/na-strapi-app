@@ -44,8 +44,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest
           
-  Deploy: 
+  deploy: 
+    needs: build
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2 
       - name: Deploy in EC2
@@ -56,16 +58,11 @@ jobs:
             APP_PORT: 1337
         run: |
           chmod 400 $SSH_PRIVATE_KEY
-    # Access and copy docker-compose file to dev-server
-          - scp -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ./docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
-    # 1. Access and Login docker and run docker compose
-    # 2. Prevent image name and tag hardcoded in the docker-compose file. Must dynamically set in the pipeline logic
-          - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$SERVER_HOST "
+          scp -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ./docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
+          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$SERVER_HOST "
               docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN &&
               export COMPOSE_PROJECT_NAME=$DEPLOY_ENV &&
-              export DC_APP_PORT=$APP_PORT &&
-
-        # docker network create node_service || true &&
+              export DC_APP_PORT=$APP_PORT &
 
               docker-compose down &&
               docker-compose up -d"
