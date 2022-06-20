@@ -3,7 +3,7 @@ services:
   strapi:
     container_name: strapi
     build: .
-    image: ${DC_IMAGE_NAME}:${DC_IMAGE_TAG}
+    image: david8087/coffee-be:latest
     env_file: .env
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
