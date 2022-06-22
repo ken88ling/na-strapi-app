@@ -38,7 +38,7 @@ jobs:
             SERVER_HOST : ${{ secrets.SERVER_HOST }}
             DEPLOY_ENV: staging
             APP_PORT: 1337
-        shell: |
+        run: |
           echo "hellow orld
 
         
