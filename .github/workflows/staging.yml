@@ -38,10 +38,8 @@ jobs:
             SERVER_HOST : ${{ secrets.SERVER_HOST }}
             DEPLOY_ENV: staging
             APP_PORT: 1337
-        run: |
-          echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
-          echo API_ENDPOINT=${{ env.APP_PORT }}"
-          echo ${{env.APP_PORT}}
+        shell: |
+          echo "hellow orld
 
         
             
