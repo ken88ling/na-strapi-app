@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./strapi-be/
-          file: ./Dockerfile
+          file: ./strapi-be//Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest
           cache-from: type=local,src=/tmp/.buildx-cache
