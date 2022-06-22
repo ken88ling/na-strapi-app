@@ -61,7 +61,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest &&
-              export DC_APP_PORT=${{deploy.outputs.APP_PORT}} &&
+              export DC_APP_PORT=${{jobs.deploy.outputs.APP_PORT}} &&
               docker-compose down &&
               docker-compose up -d"
 
