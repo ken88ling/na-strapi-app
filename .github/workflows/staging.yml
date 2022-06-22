@@ -15,9 +15,9 @@ jobs:
           path: ~/.npm
           # update caches if package lock changed
           # if failed to find key with caches then do a restore for older key
-          key: ${{ runner.os }}-node-${{ hashFiles('**/*/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
           
         
 #       - name: Login to Docker Hub
