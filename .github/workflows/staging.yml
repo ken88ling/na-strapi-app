@@ -44,24 +44,21 @@ jobs:
   deploy: 
     needs: build
     runs-on: ubuntu-latest
-    outputs:
-      APP_PORT: 1337
     steps:
       - uses: actions/checkout@v2 
       - name: Deploy in EC2
-
         env:
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             SERVER_HOST : ${{ secrets.SERVER_HOST }}
             DEPLOY_ENV: staging
-#             APP_PORT: 1337
+            APP_PORT: 1337
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
           scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest &&
-              export DC_APP_PORT=${{jobs.deploy.outputs.APP_PORT}} &&
+              export DC_APP_PORT=${{github.env.APP_PORT}} &&
               docker-compose down &&
               docker-compose up -d"
 
