@@ -42,7 +42,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
           "API_ENDPOINT=${{ env.APP_PORT }}"
           echo ${{env.APP_PORT}}
-          echo $API_ENDPOINT
+
         
             
 
