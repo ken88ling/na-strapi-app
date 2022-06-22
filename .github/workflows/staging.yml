@@ -1,9 +1,9 @@
 name: main
 on:
   pull_request:
-    branches: [feature]
+    branches: [main]
   push:
-    branches: [feature]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
