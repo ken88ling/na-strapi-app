@@ -63,5 +63,5 @@ jobs:
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
   
-              docker-compose down --rmi all &&
+              docker-compose down &&
               docker-compose up --env-file .env.staging up -d"
