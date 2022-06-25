@@ -15,10 +15,10 @@ services:
       NODE_ENV: ${NODE_ENV}
     ports:
       - 1337:1337
-    # networks:
-    #   - strapi_service
+    networks:
+      - na-strapi-app
 
-# networks:
-#   strapi_service:
-#     external:
-#       name: strapi_service
+networks:
+  na-strapi-app:
+    external:
+      name: na-strapi-app
