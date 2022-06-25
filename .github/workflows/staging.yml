@@ -3,7 +3,7 @@ on:
 #  pull_request:
 #    branches: [staging]
   push:
-    branches: [staging]
+    branches: [fe]
 
 env:
   DOCKER_IMAGE: na-strapi-app
@@ -38,6 +38,7 @@ jobs:
         with:
           context: ./strapi-be/
           push: true
+          build-args: NODE_ENV=production
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
