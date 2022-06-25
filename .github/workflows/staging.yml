@@ -1,4 +1,4 @@
-name: main
+name: Deploy Staging to AWS
 on:
 #  pull_request:
 #    branches: [staging]
@@ -39,7 +39,7 @@ jobs:
           context: ./strapi-be/
           build-args: NODE_ENV=production
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/{{ env.DOCKER_IMAGE }}:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -58,10 +58,10 @@ jobs:
             APP_PORT: 1338
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
-          scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
+          scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ./strapi-be/.env.${{ env.DEPLOY_ENV }} ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
   
               docker-compose down --rmi all &&
-              docker-compose up --env-file .env.production up -d"
+              docker-compose up --env-file .env.staging up -d"
