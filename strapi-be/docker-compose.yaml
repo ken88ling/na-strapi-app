@@ -3,8 +3,6 @@ services:
   strapi:
     build: .
     image: david8087/na-strapi-app:latest
-    args:
-      NODE_ENV: ${NODE_ENV}
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
