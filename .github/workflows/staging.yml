@@ -64,4 +64,4 @@ jobs:
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
   
               docker-compose down &&
-              docker-compose up --env-file .env.staging up -d"
+              docker-compose --env-file .env.staging up -d"
