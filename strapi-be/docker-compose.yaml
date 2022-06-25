@@ -2,8 +2,7 @@ version: "3.3"
 services:
   strapi:
     build: .
-    image: david8087/coffee-be:latest
-    env_file: .env
+    image: david8087/na-strapi-app:latest
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
@@ -14,12 +13,6 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_SSL: ${DATABASE_SSL}
       NODE_ENV: ${NODE_ENV}
-    # volumes:
-    #   - ./config:/opt/app/config
-    #   - ./src:/opt/app/src
-    #   - ./package.json:/opt/package.json
-    #   - ./yarn.lock:/opt/yarn.lock # Replace with package-lock.json if using npm
-    #   - ./Dockerfile:/opt/Dockerfile
     ports:
       - 1337:1337
     # networks:

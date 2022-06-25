@@ -1,9 +1,13 @@
 name: main
 on:
-  pull_request:
-    branches: [main]
+#  pull_request:
+#    branches: [staging]
   push:
-    branches: [main]
+    branches: [staging]
+
+env:
+  DOCKER_IMAGE: na-strapi-app
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,9 +37,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./strapi-be/
-          file: ./strapi-be//Dockerfile
+          build-args: NODE_ENV=production
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/{{ env.DOCKER_IMAGE }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -51,22 +55,13 @@ jobs:
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             SERVER_HOST : ${{ secrets.SERVER_HOST }}
             DEPLOY_ENV: staging
-            APP_PORT: 1337
+            APP_PORT: 1338
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
           scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
-              docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/coffee-be:latest &&
-              export DC_APP_PORT=${{github.env.APP_PORT}} &&
-              docker-compose down &&
-              docker-compose up -d"
-
-        
-            
-
-
-    
-
-          
-          
+              docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
+  
+              docker-compose down --rmi all &&
+              docker-compose up --env-file .env.production up -d"
