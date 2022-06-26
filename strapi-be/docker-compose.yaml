@@ -19,7 +19,7 @@ services:
       SEND_TO: ${SEND_TO}
       SEND_FROM: ${SEND_FROM}
     ports: 
-      -"${APP_PORT}:1337"
+      - "${APP_PORT}:1337"
     networks:
       - na-strapi-app
 
