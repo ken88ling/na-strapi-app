@@ -63,7 +63,7 @@ jobs:
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
           
               docker network create na-strapi-app || true &&
-              
+              export APP_PORT=$APP_PORT
               docker-compose down &&
               docker-compose --env-file .env.staging up -d"
    
