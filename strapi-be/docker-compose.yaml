@@ -3,10 +3,6 @@ services:
   strapi:
     build: .
     image: david8087/na-strapi-app:latest
-    command:
-    - bash
-    - -c
-    - echo "Hello World, $${APP_PORT}"
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
