@@ -3,7 +3,7 @@ on:
 #  pull_request:
 #    branches: [staging]
   push:
-    branches: [staging]
+    branches: [Fe]
 env:
   DOCKER_IMAGE: na-strapi-app
 
@@ -57,7 +57,7 @@ jobs:
             APP_PORT: 1338
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 400 private_key
-          scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ./strapi-be/.env.${{ env.DEPLOY_ENV }} ubuntu@$SERVER_HOST:/home/ubuntu
+          scp -o StrictHostKeyChecking=no -i private_key ./strapi-be/docker-compose.yaml ./strapi-be/.env.staging ubuntu@$SERVER_HOST:/home/ubuntu
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@$SERVER_HOST "
               docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} &&
               docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest &&
