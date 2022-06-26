@@ -6,7 +6,7 @@ services:
     command:
     - bash
     - -c
-    - echo "${APP_PORT}"
+    - echo "$${APP_PORT}"
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
