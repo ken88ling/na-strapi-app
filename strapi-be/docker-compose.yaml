@@ -6,7 +6,7 @@ services:
     command:
     - bash
     - -c
-    - echo "$${APP_PORT}"
+    - echo "Hello World, $${APP_PORT}"
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
@@ -23,7 +23,7 @@ services:
       SEND_TO: ${SEND_TO}
       SEND_FROM: ${SEND_FROM}
     ports:
-      - 1337:1337
+      - ${APP_PORT}:1337
     networks:
       - na-strapi-app
 
