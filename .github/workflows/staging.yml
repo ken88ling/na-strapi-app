@@ -3,7 +3,7 @@ on:
 #  pull_request:
 #    branches: [staging]
   push:
-    branches: [FEATURE]
+    branches: [staging]
 env:
   DOCKER_IMAGE: na-strapi-app
 
