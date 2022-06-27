@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
 
-if [ $NODE_ENV == "production" ]
+if [ $NODE_ENV == "development" ]
 then
-    yarn start
-else
     yarn dev
+else
+    yarn start
 fi
+
 
 #
 #if [ -z "NODE_ENV" == "production" ]; then
